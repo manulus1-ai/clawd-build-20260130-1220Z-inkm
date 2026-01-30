@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>InkMatch — Fountain Pen Ink Vibe + Swatch Card</title>
+  <meta name="description" content="Generate a shareable fountain-pen ink ‘vibe’ profile + printable swatch card (sheen/shading/shimmer/water-resistance). Offline-capable." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="wrap">
+    <div class="title">
+      <h1>InkMatch</h1>
+      <p class="subtitle">Make a fountain-pen ink "vibe" profile and a shareable swatch card.</p>
+    </div>
+    <div class="top-actions">
+      <button id="btnRandom" class="btn">Random niche challenge</button>
+      <button id="btnCopyLink" class="btn primary">Copy share link</button>
+    </div>
+  </header>
+
+  <main class="wrap grid">
+    <section class="card">
+      <h2>Your preferences</h2>
+      <p class="hint">Tip: use <kbd>Tab</kbd> + <kbd>↑</kbd>/<kbd>↓</kbd>. Everything saves into the URL.</p>
+
+      <div class="row">
+        <label for="preset">Start from a known ink</label>
+        <select id="preset"></select>
+      </div>
+
+      <div class="row">
+        <label for="baseColor">Base color</label>
+        <input id="baseColor" type="color" value="#2f6df6" />
+      </div>
+
+      <div class="row">
+        <label>Special effects</label>
+        <div class="chips" role="group" aria-label="Ink effects">
+          <label class="chip"><input type="checkbox" id="fxShading"> Shading</label>
+          <label class="chip"><input type="checkbox" id="fxSheen"> Sheen</label>
+          <label class="chip"><input type="checkbox" id="fxShimmer"> Shimmer</label>
+          <label class="chip"><input type="checkbox" id="fxWaterRes"> Water-resistant</label>
+          <label class="chip"><input type="checkbox" id="fxIronGall"> Iron gall (high maintenance)</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="flow">Flow preference <span id="flowVal" class="val"></span></label>
+        <input id="flow" type="range" min="-2" max="2" step="1" value="0" />
+        <div class="range-legend"><span>Dry</span><span>Average</span><span>Wet</span></div>
+      </div>
+
+      <div class="row">
+        <label for="dryTime">Dry time target <span id="dryVal" class="val"></span></label>
+        <input id="dryTime" type="range" min="0" max="3" step="1" value="1" />
+        <div class="range-legend"><span>Fast</span><span>Medium</span><span>Slow</span></div>
+      </div>
+
+      <div class="row">
+        <label for="maintenance">Maintenance tolerance <span id="maintVal" class="val"></span></label>
+        <input id="maintenance" type="range" min="0" max="3" step="1" value="1" />
+        <div class="range-legend"><span>Low</span><span>OK</span><span>Chaos</span></div>
+      </div>
+
+      <div class="row">
+        <label for="paper">Paper scenario</label>
+        <select id="paper">
+          <option value="daily">Daily paper (unknown / office)</option>
+          <option value="nice">Nice notebook (Rhodia/Clairefontaine-ish)</option>
+          <option value="tomo">Tomoe River / sheen playground</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <label for="nib">Nib size</label>
+        <select id="nib">
+          <option value="ef">EF/F (fine, controlled)</option>
+          <option value="m">M (balanced)</option>
+          <option value="b">B/Stub (juicy)</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <label for="notes">Optional: add a note (shows on your card)</label>
+        <input id="notes" type="text" maxlength="64" placeholder="e.g., 'for journaling' or 'for postcards'" />
+      </div>
+
+      <div class="actions">
+        <button id="btnCopyText" class="btn">Copy share text</button>
+        <button id="btnDownload" class="btn">Download swatch card (PNG)</button>
+      </div>
+
+      <details class="help">
+        <summary>What is this optimizing for?</summary>
+        <ul>
+          <li><strong>Pen feel</strong> (wet vs dry) + <strong>paper behavior</strong> (feathering/smear risk)</li>
+          <li><strong>Special effects</strong> without accidental regret (monster sheen + daily paper = sadness)</li>
+          <li><strong>Maintenance</strong>: pigment/iron gall/shimmer can be awesome, but not "leave it in the pen for 6 months" inks</li>
+        </ul>
+      </details>
+    </section>
+
+    <section class="card">
+      <h2>Your output</h2>
+      <div id="output" class="output"></div>
+
+      <h3>Swatch card preview</h3>
+      <p class="hint">This is what you’ll download/share. It’s deterministic from the URL.</p>
+      <canvas id="cardCanvas" width="900" height="540" aria-label="Swatch card preview" role="img"></canvas>
+
+      <div class="small">
+        <p><strong>Share artifact:</strong> copy the link (state-in-URL), or download the PNG and post it.</p>
+        <p class="small muted">No trackers. No server. Everything runs locally.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <p class="muted">Made for fountain-pen people who argue about sheen, shading, flow, and paper like it’s sports.</p>
+    <p class="muted">Sources: Mountain of Ink (ink properties + sheen categories) and Wikipedia (iron gall / fountain pen ink basics). See README in repo.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
